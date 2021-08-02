@@ -48,4 +48,28 @@ d3.json("https://earthquake.usgs.gov/earthquakes/feed/v1.0/summary/all_week.geoj
             radius: setSize(feature.properties.mag)
         }).bindPopup("<h2>Magnitude: " + feature.properties.mag + "</h2><h2>Depth: " + feature.geometry.coordinates[2].toFixed(2) + "</h2>").addTo(myMap);
     });    
+
+    // create legend
+    var legend = L.control({ position: "bottomright" });
+    legend.onAdd = function() {
+        var div = L.DomUtil.create("div", "info legend");
+        var limits = ["-10-10", "10-30", "30-50", "50-70", "70-90", "90+"];
+        var colors = [ "#85FF33", "yellow",  "#FFEC33", "#FFB733", "#FF8E33", "red" ];
+        var labels = [];
+
+        // Add min & max
+        var legendInfo = 
+        "<div class=\"labels\">Depth (m)" +
+        "</div>";
+
+        div.innerHTML = legendInfo;
+
+        limits.forEach(function(limit, index) {
+        labels.push("<li style=\"background-color: " + colors[index] + "\">" + limit + "</li>");
+        });
+
+        div.innerHTML += '<ul">' + labels.join("") + "</ul>";
+        return div;
+    };
+    legend.addTo(myMap);
 })
