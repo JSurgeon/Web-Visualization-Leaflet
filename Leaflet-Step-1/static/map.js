@@ -28,7 +28,6 @@ d3.json("https://earthquake.usgs.gov/earthquakes/feed/v1.0/summary/all_week.geoj
       
       
       // Adding a tile layer (the background map image) to our map
-      // We use the addTo method to add objects to our map
       L.tileLayer("https://api.mapbox.com/styles/v1/{id}/tiles/{z}/{x}/{y}?access_token={accessToken}", {
         attribution: "© <a href='https://www.mapbox.com/about/maps/'>Mapbox</a> © <a href='http://www.openstreetmap.org/copyright'>OpenStreetMap</a> <strong><a href='https://www.mapbox.com/map-feedback/' target='_blank'>Improve this map</a></strong>",
         tileSize: 512,
@@ -40,12 +39,11 @@ d3.json("https://earthquake.usgs.gov/earthquakes/feed/v1.0/summary/all_week.geoj
 
     //loop through features and create earthquake markers
     data.features.forEach(feature => {
-       // console.log(feature.properties.mag);
         L.circleMarker([feature.geometry.coordinates[1],feature.geometry.coordinates[0]], {
             stroke: false,
             fillOpacity: 0.75,
             color: setColor(feature.geometry.coordinates[2]),
             radius: setSize(feature.properties.mag)
-        }).bindPopup("<h1>" + feature.geometry.coordinates[2] + "</h1>").addTo(myMap);
+        }).bindPopup("<h2>Magnitude: " + feature.properties.mag + "</h2><h2>Depth: " + feature.geometry.coordinates[2].toFixed(2) + "</h2>").addTo(myMap);
     });    
 })
