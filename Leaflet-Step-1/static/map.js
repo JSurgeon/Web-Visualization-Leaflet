@@ -5,6 +5,7 @@ function setSize(mag) {
     return mag * 3;
 }
 
+// create function to set depth color
 function setColor(depth) {
     if (depth < 10) {return "#85FF33";}
     if (depth >= 10 && depth < 30) {return "yellow";}
