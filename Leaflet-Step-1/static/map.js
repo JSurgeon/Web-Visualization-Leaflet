@@ -40,9 +40,11 @@ d3.json("https://earthquake.usgs.gov/earthquakes/feed/v1.0/summary/all_week.geoj
     //loop through features and create earthquake markers
     data.features.forEach(feature => {
         L.circleMarker([feature.geometry.coordinates[1],feature.geometry.coordinates[0]], {
-            stroke: false,
+            stroke: true,
+            weight: .5,
             fillOpacity: 0.75,
-            color: setColor(feature.geometry.coordinates[2]),
+            color : "black",
+            fillColor: setColor(feature.geometry.coordinates[2]),
             radius: setSize(feature.properties.mag)
         }).bindPopup("<h2>Magnitude: " + feature.properties.mag + "</h2><h2>Depth: " + feature.geometry.coordinates[2].toFixed(2) + "</h2>").addTo(myMap);
     });    
