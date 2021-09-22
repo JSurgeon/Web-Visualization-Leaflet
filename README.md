@@ -1,1 +1,1 @@
-# leaflet-challenge
+# Web Visualization with Leaflet.js
